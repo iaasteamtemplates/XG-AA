@@ -7,11 +7,13 @@ Param
   [Parameter (Mandatory= $true)]
   [String] $portbgw,
   [Parameter (Mandatory= $true)]
-  [String] $hostname
+  [String] $hostname,
+  [Parameter (Mandatory= $true)]
+  [String] $sshport
 )
 $secpassword = ConvertTo-SecureString $password -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential ("admin", $secpassword)
-$session = New-SSHSession -ComputerName $hostname -Credential $creds -AcceptKey
+$session = New-SSHSession -ComputerName $hostname -Credential $creds -AcceptKey -Port $sshport
 $SSHStream = New-SSHShellStream -SessionId $session.SessionId
 If ($session.Connected) {
     $SSHStream.WriteLine("5")
