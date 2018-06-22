@@ -16,7 +16,10 @@ $creds = New-Object System.Management.Automation.PSCredential ("admin", $secpass
 $session = New-SSHSession -ComputerName $hostname -Credential $creds -AcceptKey -Port $sshport
 $SSHStream = New-SSHShellStream -SessionId $session.SessionId
 If ($session.Connected) {
-    $SSHStream.WriteLine("5")
+    Start-Sleep -s 30
+	$SSHStream.WriteLine("A")
+    Start-Sleep -s 2
+	$SSHStream.WriteLine("5")
     Start-Sleep -s 2
     $SSHStream.WriteLine("3")
     Start-Sleep -s 2
