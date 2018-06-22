@@ -17,14 +17,14 @@ $session = New-SSHSession -ComputerName $hostname -Credential $creds -AcceptKey 
 $SSHStream = New-SSHShellStream -SessionId $session.SessionId
 If ($session.Connected) {
     Start-Sleep -s 30
-	$SSHStream.WriteLine("A")
-    Start-Sleep -s 2
+	$SSHStream.WriteLine("a")
+    Start-Sleep -s 10
 	$SSHStream.WriteLine("5")
-    Start-Sleep -s 2
+    Start-Sleep -s 5
     $SSHStream.WriteLine("3")
-    Start-Sleep -s 2
+    Start-Sleep -s 5
     $SSHStream.WriteLine("touch /tmp/zebraman.conf")
-    Start-Sleep -s 2
+    Start-Sleep -s 5
     $SSHStream.WriteLine("cat >/tmp/zebraman.conf <<EOL")
     $SSHStream.WriteLine("!")
     $SSHStream.WriteLine("! ZEBRA configuration file")
