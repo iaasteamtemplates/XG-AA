@@ -19,6 +19,8 @@ If ($session.Connected) {
     Start-Sleep -s 30
 	$SSHStream.WriteLine("a")
     Start-Sleep -s 10
+	$SSHStream.WriteLine("")
+	Start-Sleep -s 5
 	$SSHStream.WriteLine("5")
     Start-Sleep -s 5
     $SSHStream.WriteLine("3")
