@@ -26,18 +26,25 @@ If ($session.Connected) {
     Start-Sleep -s 5
     $SSHStream.WriteLine("3")
     Start-Sleep -s 5
-    $SSHStream.WriteLine("telnet localhost zebra")
+    $SSHStream.WriteLine("touch /tmp/zebraman.conf")
     Start-Sleep -s 5
-    $SSHStream.WriteLine("enable")
-    Start-Sleep -s 5
-	$SSHStream.WriteLine("configure terminal")
-    Start-Sleep -s 5
+    $SSHStream.WriteLine("cat >/tmp/zebraman.conf <<EOL")
+    $SSHStream.WriteLine("!")
+    $SSHStream.WriteLine("! ZEBRA configuration file")
+    $SSHStream.WriteLine("!")
+    $SSHStream.WriteLine("hostname router")
+    $SSHStream.WriteLine("log stdout")
+    $SSHStream.WriteLine("line vty")
+    $SSHStream.WriteLine("no login")
     $SSHStream.WriteLine("ip route 168.63.129.16/32 $portagw PortA")
-    Start-Sleep -s 3
-	$SSHStream.WriteLine("ip route 168.63.129.16/32 $portbgw PortB")
-    Start-Sleep -s 3
-	$SSHStream.WriteLine("write")
+    $SSHStream.WriteLine("ip route 168.63.129.16/32 $portbgw PortB")
+    $SSHStream.WriteLine("!")
+    $SSHStream.WriteLine("EOL")
     Start-Sleep -s 5
+    $SSHStream.WriteLine("killall zebra")
+    Start-Sleep -s 10
+    $SSHStream.WriteLine("zebra -f /tmp/zebraman.conf > /dev/null &")
+    Start-Sleep -s 10
     $SSHStream.WriteLine("reboot")
     Start-Sleep -s 2
     $SSHStream.Read()  
